@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.seondf.com/js/v5/agent.js"></script>
+    <script>
+        function copyToClipboard(text) {
+            document.getElementById("out").value = text;
+        }
+        let startTime = performance.now();
+        // Perform some operations
+        seon.config({
+            session_id: "zensdeck.com",
+            audio_fingerprint: true,
+            canvas_fingerprint: true,
+            webgl_fingerprint: true,
+            silent_mode: true,
+            max_proxy_delay: 1000,
+            onSuccess: function (message) {
+                console.log("success", message);
+            },
+            onError: function (message) {
+                console.log("error", message);
+            }
+        });
+        seon.getBase64Session(function (data) {
+            if (data) {
+                // console.log("Session payload", data);
+                copyToClipboard(data)
+                console.log("copied1")
+                // navigator.clipboard.writeText(data);
+            } else {
+                console.log("Failed to retrieve session data.");
+            }
+            let endTime = performance.now();
+            let elapsedTime = endTime - startTime; // Elapsed time in milliseconds
+            console.log(`Elapsed time: ${elapsedTime} ms`);
+        });
+    </script>
+</head>
+
+<body>
+    <textarea cols="50" rows="20" id="out"></textarea>
+
+</body>
+
+</html>

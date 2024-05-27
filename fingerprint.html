@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Initialize the agent on page load.
+        const fpPromise = import('https://fpjscdn.net/v3/z0aPx5uKCYtMHuVjW3LF');
+        fpPromise.then(FP => {
+
+            let startTime = performance.now();
+            FP.load().then((fp) => {
+                fp.get().then(res => {
+                    console.dir(res.visitorId)
+                let endTime = performance.now();
+                let elapsedTime = endTime - startTime; // Elapsed time in milliseconds
+                console.log(`Elapsed time: ${elapsedTime} ms`);
+
+                })
+
+            })
+        });
+    </script>
+    
+</body>
+</html>
